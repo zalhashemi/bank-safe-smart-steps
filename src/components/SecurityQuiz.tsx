@@ -1,5 +1,6 @@
-
 import React, { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
+import { Check, X } from 'lucide-react';
 
 interface Question {
   question: string;
@@ -8,9 +9,12 @@ interface Question {
 }
 
 const SecurityQuiz: React.FC = () => {
+  const { t } = useLanguage();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
+  const [answered, setAnswered] = useState(false);
 
   const questions: Question[] = [
     {
@@ -45,27 +49,38 @@ const SecurityQuiz: React.FC = () => {
     }
   ];
 
-  const handleAnswerClick = (selectedAnswer: number) => {
-    if (selectedAnswer === questions[currentQuestion].correctAnswer) {
+  const handleAnswerClick = (selectedIndex: number) => {
+    if (answered) return;
+    
+    setSelectedAnswer(selectedIndex);
+    setAnswered(true);
+    
+    if (selectedIndex === questions[currentQuestion].correctAnswer) {
       setScore(score + 1);
     }
 
-    if (currentQuestion + 1 < questions.length) {
-      setCurrentQuestion(currentQuestion + 1);
-    } else {
-      setShowScore(true);
-    }
+    setTimeout(() => {
+      if (currentQuestion + 1 < questions.length) {
+        setCurrentQuestion(currentQuestion + 1);
+        setSelectedAnswer(null);
+        setAnswered(false);
+      } else {
+        setShowScore(true);
+      }
+    }, 1000);
   };
 
   const resetQuiz = () => {
     setCurrentQuestion(0);
     setScore(0);
     setShowScore(false);
+    setSelectedAnswer(null);
+    setAnswered(false);
   };
 
   return (
     <section style={{ padding: '2rem' }}>
-      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>Test Your Security Knowledge</h2>
+      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>{t('quiz.title')}</h2>
       <div style={{
         maxWidth: '600px',
         margin: '0 auto',
@@ -76,8 +91,8 @@ const SecurityQuiz: React.FC = () => {
       }}>
         {showScore ? (
           <div style={{ textAlign: 'center' }}>
-            <h3>Quiz Complete!</h3>
-            <p>Your score: {score} out of {questions.length}</p>
+            <h3>{t('quiz.complete')}</h3>
+            <p>{t('quiz.score')} {score} {t('quiz.outOf')} {questions.length}</p>
             <button
               onClick={resetQuiz}
               style={{
@@ -90,7 +105,7 @@ const SecurityQuiz: React.FC = () => {
                 marginTop: '1rem'
               }}
             >
-              Try Again
+              {t('quiz.tryAgain')}
             </button>
           </div>
         ) : (
@@ -98,22 +113,38 @@ const SecurityQuiz: React.FC = () => {
             <p style={{ marginBottom: '1rem' }}>Question {currentQuestion + 1} of {questions.length}</p>
             <h3 style={{ marginBottom: '1.5rem' }}>{questions[currentQuestion].question}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-              {questions[currentQuestion].options.map((option, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleAnswerClick(index)}
-                  style={{
-                    padding: '1rem',
-                    backgroundColor: '#f5f5f5',
-                    border: '1px solid #e0e0e0',
-                    borderRadius: '4px',
-                    cursor: 'pointer',
-                    textAlign: 'left'
-                  }}
-                >
-                  {option}
-                </button>
-              ))}
+              {questions[currentQuestion].options.map((option, index) => {
+                const isCorrect = index === questions[currentQuestion].correctAnswer;
+                const isSelected = index === selectedAnswer;
+                const showFeedback = answered && isSelected;
+                
+                return (
+                  <button
+                    key={index}
+                    onClick={() => handleAnswerClick(index)}
+                    style={{
+                      padding: '1rem',
+                      backgroundColor: showFeedback 
+                        ? (isCorrect ? '#F2FCE2' : '#FFEBEE')
+                        : '#f5f5f5',
+                      border: '1px solid #e0e0e0',
+                      borderRadius: '4px',
+                      cursor: answered ? 'not-allowed' : 'pointer',
+                      textAlign: 'left',
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center'
+                    }}
+                  >
+                    <span>{option}</span>
+                    {showFeedback && (
+                      isCorrect 
+                        ? <Check className="text-green-600" />
+                        : <X className="text-red-600" />
+                    )}
+                  </button>
+                );
+              })}
             </div>
           </>
         )}

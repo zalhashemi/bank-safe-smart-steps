@@ -1,20 +1,18 @@
 
 import React from 'react';
+import LanguageToggle from './LanguageToggle';
 
 const Header: React.FC = () => {
   return (
-    <header style={{
-      backgroundColor: '#073374',
-      padding: '1rem',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <img 
-        src="/bbk-logo.png" 
-        alt="BBK Bank Logo" 
-        style={{ height: '50px' }}
-      />
+    <header className="bg-[#073374] p-4 flex items-center justify-between relative">
+      <div className="flex-1 flex justify-center">
+        <img 
+          src="bbk-logo.png" 
+          alt="BBK Bank Logo" 
+          className="h-[50px]"
+        />
+      </div>
+      <LanguageToggle />
     </header>
   );
 };
