@@ -1,12 +1,27 @@
-// Update this page (the content is just a fallback if you fail to update the page)
 
-const Index = () => {
+import React from 'react';
+import Header from '../components/Header';
+import SecurityRisks from '../components/SecurityRisks';
+import BestPractices from '../components/BestPractices';
+import SecurityQuiz from '../components/SecurityQuiz';
+
+const Index: React.FC = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-gray-600">Start building your amazing project here!</p>
-      </div>
+    <div style={{ maxWidth: '1200px', margin: '0 auto', backgroundColor: '#ffffff' }}>
+      <Header />
+      <main>
+        <div style={{ padding: '2rem', textAlign: 'center' }}>
+          <h1 style={{ color: '#073374', marginBottom: '1rem' }}>
+            Banking Security Education Center
+          </h1>
+          <p style={{ color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+            Learn how to protect your financial information and bank securely online.
+          </p>
+        </div>
+        <SecurityRisks />
+        <BestPractices />
+        <SecurityQuiz />
+      </main>
     </div>
   );
 };
