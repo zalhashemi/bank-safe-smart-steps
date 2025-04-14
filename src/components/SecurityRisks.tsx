@@ -26,7 +26,13 @@ const SecurityRisks: React.FC = () => {
 
   return (
     <section style={{ padding: '2rem' }}>
-      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>{t('sections.risks')}</h2>
+      <h2 style={{ 
+        color: '#073374', 
+        marginBottom: '1.5rem',
+        fontSize: '2rem',
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 'bold'
+      }}>{t('sections.risks')}</h2>
       <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
         {risks.map((risk, index) => (
           <div
@@ -41,7 +47,12 @@ const SecurityRisks: React.FC = () => {
           >
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
               {risk.icon}
-              <h3 style={{ color: '#f6ac5e' }}>{risk.title}</h3>
+              <h3 style={{ 
+                color: '#f6ac5e',
+                fontSize: '1.5rem',
+                fontFamily: "'Playfair Display', serif",
+                fontWeight: 'bold'
+              }}>{risk.title}</h3>
             </div>
             <p style={{ color: '#333' }}>{risk.description}</p>
           </div>

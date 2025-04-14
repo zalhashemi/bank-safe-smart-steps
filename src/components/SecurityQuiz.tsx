@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Check, X } from 'lucide-react';
@@ -81,7 +80,13 @@ const SecurityQuiz: React.FC = () => {
 
   return (
     <section style={{ padding: '2rem' }}>
-      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>{t('quiz.title')}</h2>
+      <h2 style={{ 
+        color: '#073374', 
+        marginBottom: '1.5rem',
+        fontSize: '2rem',
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 'bold'
+      }}>{t('quiz.title')}</h2>
       <div style={{
         maxWidth: '600px',
         margin: '0 auto',
@@ -155,4 +160,3 @@ const SecurityQuiz: React.FC = () => {
 };
 
 export default SecurityQuiz;
-

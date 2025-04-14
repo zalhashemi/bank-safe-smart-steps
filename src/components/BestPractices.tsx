@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Shield, Key, LineChart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -26,8 +25,14 @@ const BestPractices: React.FC = () => {
   ];
 
   return (
-    <section style={{ padding: '2rem', backgroundColor: '#f5f5f5' }}>
-      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>{t('sections.practices')}</h2>
+    <section style={{ padding: '2rem', backgroundColor: '#f6ac5e' }}>
+      <h2 style={{ 
+        color: '#073374', 
+        marginBottom: '1.5rem',
+        fontSize: '2rem',
+        fontFamily: "'Playfair Display', serif",
+        fontWeight: 'bold'
+      }}>{t('sections.practices')}</h2>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
         {practices.map((practice, index) => (
           <div

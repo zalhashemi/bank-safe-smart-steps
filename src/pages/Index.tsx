@@ -14,10 +14,22 @@ const Index: React.FC = () => {
       <Header />
       <main>
         <div style={{ padding: '2rem', textAlign: 'center' }}>
-          <h1 style={{ color: '#073374', marginBottom: '1rem' }}>
+          <h1 style={{ 
+            color: '#073374', 
+            marginBottom: '1rem',
+            fontSize: '2.5rem',
+            fontFamily: "'Playfair Display', serif",
+            fontWeight: 'bold'
+          }}>
             {t('app.title')}
           </h1>
-          <p style={{ color: '#666', maxWidth: '600px', margin: '0 auto' }}>
+          <p style={{ 
+            color: '#666', 
+            maxWidth: '800px', 
+            margin: '0 auto',
+            fontSize: '1.25rem',
+            lineHeight: '1.6'
+          }}>
             {t('app.subtitle')}
           </p>
         </div>
