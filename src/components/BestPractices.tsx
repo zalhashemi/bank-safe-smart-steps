@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { Shield, Key, LineChart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
@@ -25,7 +26,7 @@ const BestPractices: React.FC = () => {
   ];
 
   return (
-    <section style={{ padding: '2rem', backgroundColor: '#f6ac5e' }}>
+    <section style={{ padding: '2rem', backgroundColor: '#fad02e' }}>
       <h2 style={{ 
         color: '#073374', 
         marginBottom: '1.5rem',
@@ -45,7 +46,8 @@ const BestPractices: React.FC = () => {
                 width: '100%',
                 padding: '1rem',
                 textAlign: 'left',
-                backgroundColor: expandedIndex === index ? '#fad02e' : 'white',
+                backgroundColor: expandedIndex === index ? '#073374' : 'white',
+                color: expandedIndex === index ? 'white' : 'inherit',
                 border: 'none',
                 cursor: 'pointer',
                 display: 'flex',
@@ -53,11 +55,13 @@ const BestPractices: React.FC = () => {
                 gap: '0.5rem'
               }}
             >
-              {practice.icon}
+              <span style={{ color: expandedIndex === index ? 'white' : 'inherit' }}>
+                {practice.icon}
+              </span>
               {practice.title}
             </button>
             {expandedIndex === index && (
-              <div style={{ padding: '1rem' }}>
+              <div style={{ padding: '1rem', backgroundColor: '#073374', color: 'white' }}>
                 {practice.content}
               </div>
             )}
