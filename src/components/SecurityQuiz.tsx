@@ -1,9 +1,10 @@
+
 import React, { useState } from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { Check, X } from 'lucide-react';
 
 interface Question {
-  question: string;
+  questionKey: string;
   options: string[];
   correctAnswer: number;
 }
@@ -18,32 +19,32 @@ const SecurityQuiz: React.FC = () => {
 
   const questions: Question[] = [
     {
-      question: 'What should you do if you receive an email asking for your banking credentials?',
+      questionKey: t('quiz.question1'),
       options: [
-        'Enter your credentials to verify your account',
-        'Delete the email and report it as phishing',
-        'Reply asking for more information',
-        'Click on any links to check if they are legitimate'
+        t('quiz.q1.option1'),
+        t('quiz.q1.option2'),
+        t('quiz.q1.option3'),
+        t('quiz.q1.option4')
       ],
       correctAnswer: 1
     },
     {
-      question: 'Which is the most secure password?',
+      questionKey: t('quiz.question2'),
       options: [
-        'password123',
-        'birthdaydate',
-        'P@ssw0rd!2023',
-        'qwerty'
+        t('quiz.q2.option1'),
+        t('quiz.q2.option2'),
+        t('quiz.q2.option3'),
+        t('quiz.q2.option4')
       ],
       correctAnswer: 2
     },
     {
-      question: 'When is it safe to use public Wi-Fi for banking?',
+      questionKey: t('quiz.question3'),
       options: [
-        'Only with a VPN connection',
-        'When the network has a password',
-        'During non-peak hours',
-        'Anytime if the connection is strong'
+        t('quiz.q3.option1'),
+        t('quiz.q3.option2'),
+        t('quiz.q3.option3'),
+        t('quiz.q3.option4')
       ],
       correctAnswer: 0
     }
@@ -111,7 +112,7 @@ const SecurityQuiz: React.FC = () => {
         ) : (
           <>
             <p style={{ marginBottom: '1rem' }}>Question {currentQuestion + 1} of {questions.length}</p>
-            <h3 style={{ marginBottom: '1.5rem' }}>{questions[currentQuestion].question}</h3>
+            <h3 style={{ marginBottom: '1.5rem' }}>{questions[currentQuestion].questionKey}</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
               {questions[currentQuestion].options.map((option, index) => {
                 const isCorrect = index === questions[currentQuestion].correctAnswer;
@@ -121,7 +122,7 @@ const SecurityQuiz: React.FC = () => {
                 return (
                   <button
                     key={index}
-                    onClick={() => handleAnswerClick(index)}
+                    onClick={() => !answered && handleAnswerClick(index)}
                     style={{
                       padding: '1rem',
                       backgroundColor: showFeedback 
@@ -154,3 +155,4 @@ const SecurityQuiz: React.FC = () => {
 };
 
 export default SecurityQuiz;
+

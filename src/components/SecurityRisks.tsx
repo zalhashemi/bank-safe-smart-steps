@@ -1,25 +1,32 @@
 
 import React from 'react';
+import { Mail, Wifi, KeyRound } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 const SecurityRisks: React.FC = () => {
+  const { t } = useLanguage();
+
   const risks = [
     {
-      title: 'Phishing Attacks',
-      description: 'Fraudulent attempts to obtain sensitive information by disguising as a trustworthy entity.'
+      title: t('risks.phishing.title'),
+      description: t('risks.phishing.description'),
+      icon: <Mail className="h-6 w-6 text-[#f6ac5e]" />
     },
     {
-      title: 'Public Wi-Fi',
-      description: 'Using unsecured public networks can expose your banking data to cybercriminals.'
+      title: t('risks.wifi.title'),
+      description: t('risks.wifi.description'),
+      icon: <Wifi className="h-6 w-6 text-[#f6ac5e]" />
     },
     {
-      title: 'Weak Passwords',
-      description: 'Simple or reused passwords make your account vulnerable to unauthorized access.'
+      title: t('risks.passwords.title'),
+      description: t('risks.passwords.description'),
+      icon: <KeyRound className="h-6 w-6 text-[#f6ac5e]" />
     }
   ];
 
   return (
     <section style={{ padding: '2rem' }}>
-      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>Common Security Risks</h2>
+      <h2 style={{ color: '#073374', marginBottom: '1.5rem' }}>{t('sections.risks')}</h2>
       <div style={{ display: 'grid', gap: '1.5rem', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
         {risks.map((risk, index) => (
           <div
@@ -32,7 +39,10 @@ const SecurityRisks: React.FC = () => {
               border: '1px solid #e0e0e0'
             }}
           >
-            <h3 style={{ color: '#f6ac5e', marginBottom: '0.5rem' }}>{risk.title}</h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem' }}>
+              {risk.icon}
+              <h3 style={{ color: '#f6ac5e' }}>{risk.title}</h3>
+            </div>
             <p style={{ color: '#333' }}>{risk.description}</p>
           </div>
         ))}
