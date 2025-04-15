@@ -1,7 +1,7 @@
 
 import React from 'react';
 import LanguageToggle from './LanguageToggle';
-import BBKLogo from '../assets/BBK_logo.png';
+import BBKLogo from '../assets/BBK_Logo.png';
 
 const Header: React.FC = () => {
   return (
